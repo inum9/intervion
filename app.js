@@ -9,8 +9,10 @@ app.use(express.urlencoded({ extended: true })); // optional: for form submissio
 import { root as userRoutes } from "./src/routes/user.routes.js";
 import { questionRoutes } from "./src/routes/Question.routes.js";
 import { interviewRouter } from "./src/routes/interview.routes.js";
+import { AIinterviewRoutes } from "./src/routes/Ai.routes.js";
 
 app.use("/api/v1/user",userRoutes);
 app.use("/api/v1/question",questionRoutes);
 app.use("/api/v1/interview",interviewRouter)
+app.use("/api/v1/Ai",AIinterviewRoutes);
 export default app;
