@@ -9,23 +9,22 @@ const getInterviewQuestions = (role) => {
     developer: [
       "Explain the difference between synchronous and asynchronous programming.",
       "What is a closure in JavaScript?",
-      "How do you optimize performance in a web application?"
+      "How do you optimize performance in a web application?",
     ],
     designer: [
       "What is the difference between UI and UX design?",
       "Can you explain the design process you follow?",
-      "What design tools do you prefer and why?"
+      "What design tools do you prefer and why?",
     ],
     recruiter: [
       "How do you assess cultural fit during an interview?",
       "What is your experience in handling difficult candidates?",
-      "How do you handle salary negotiation?"
-    ]
+      "How do you handle salary negotiation?",
+    ],
   };
 
   return roleQuestions[role] || [];
 };
-
 
 const startInterview = asyncHandler(async (req, res) => {
   const { candidateId, interviewRole } = req.body;
@@ -44,7 +43,9 @@ const startInterview = asyncHandler(async (req, res) => {
 
   await interview.save();
 
-  res.status(201).json(new ApiResponse(201, interview, "Interview started successfully"));
+  res
+    .status(201)
+    .json(new ApiResponse(201, interview, "Interview started successfully"));
 });
 const submitAnswer = asyncHandler(async (req, res) => {
   const { interviewId, answer } = req.body;
@@ -63,10 +64,10 @@ const submitAnswer = asyncHandler(async (req, res) => {
   const question = interview.questions[interview.currentQuestionIndex];
 
   // Get AI feedback for the answer
-  const aiFeedback = await evaluateAnswerAi(answer);
+  const {aiFeedback,aiSuggestions} = await evaluateAnswerAi(answer);
 
   // Store the answer and feedback
-  interview.answers.push({ question, answer, aiFeedback });
+  interview.answers.push({ question, answer, aiFeedback,aiSuggestions });
 
   // Calculate the selection probability based on AI feedback
   const selectionProbability = calculateSelectionProbability(aiFeedback);
@@ -81,7 +82,9 @@ const submitAnswer = asyncHandler(async (req, res) => {
 
   await interview.save();
 
-  res.status(200).json(new ApiResponse(200, interview, "Answer submitted and evaluated"));
+  res
+    .status(200)
+    .json(new ApiResponse(200, interview, "Answer submitted and evaluated"));
 });
 
 // Calculate selection probability based on AI feedback
