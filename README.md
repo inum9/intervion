@@ -1,59 +1,33 @@
+
+Intervion - AI-Based Interview System
 Project Overview
-This is a backend system for an AI-powered interview platform. The system allows candidates to participate in mock interviews, submit their answers to role-specific questions, and receive AI-based feedback to improve their performance. The application uses the Google Gemini API to evaluate the answers based on clarity, conciseness, grammar, and relevance. The system also estimates the likelihood of a candidate getting selected based on the AI's evaluation.
+Intervion is a backend system for an AI-powered interview platform. The platform enables candidates to participate in mock interviews, submit their answers, and receive AI-based feedback to improve their performance. The system uses the Google Gemini API to evaluate the answers and calculate the candidate’s selection probability based on their responses.
+
+This project is a Node.js application using Express.js and MongoDB to provide a robust backend solution.
+
 
 Features
-AI-Driven Interview System:
-
-Conduct mock interviews where AI asks questions based on the role of the candidate (e.g., Developer, Designer, Recruiter).
-
-AI-Based Answer Evaluation:
-
-After each answer, the AI evaluates the response and provides short, actionable feedback on how to improve the answer.
-
-Selection Probability:
-
-The system calculates the probability of the candidate getting selected based on their performance and AI feedback.
-
-Interview Summary:
-
-After the interview is completed, the system generates a summary of the candidate's performance, including feedback and selection probability.
-
-Mock Interview Scenarios:
-
-The system supports different roles such as Developers, Designers, and Recruiters, each with role-specific questions.
-
-Integration with Google Gemini API:
-
-The system uses the Google Gemini API for analyzing and generating AI feedback based on the candidate's answers.
+AI-Driven Interview System: Allows candidates to participate in mock interviews by answering role-specific questions asked by AI.
+AI-Based Answer Evaluation: After each answer, the AI evaluates the response and provides concise and actionable feedback on how the candidate can improve.
+Selection Probability: The system calculates the likelihood of the candidate getting selected based on their performance.
+Interview Summary: Generates a summary of the interview after completion, including feedback and the selection probability.
+Support for Multiple Roles: Candidates can choose different interview roles (e.g., Developer, Designer, Recruiter) and the system will generate questions specific to that role.
 
 Tech Stack
-Node.js - Server-side JavaScript runtime.
-
-Express.js - Web framework for building RESTful APIs.
-
-MongoDB - NoSQL database to store candidates' information and interview records.
-
-Mongoose - ODM for MongoDB to define schemas and interact with the database.
-
-Google Gemini API - To generate AI feedback and evaluate candidate responses.
-
-Axios - For making HTTP requests.
-
-Swagger UI - For automatic API documentation.
-
-JWT Authentication - For secure user authentication and authorization.
-
+Node.js: JavaScript runtime for building server-side applications.
+Express.js: Web framework for building REST APIs.
+MongoDB: NoSQL database for storing candidate and interview data.
+Mongoose: ODM (Object Document Mapper) to interact with MongoDB.
+Google Gemini API: For evaluating candidate answers and generating AI-based feedback.
+postman: For automatically generating and viewing API documentation.
+JWT Authentication: For secure user authentication and authorization.
 Setup & Installation
 Prerequisites
-Before you begin, ensure that you have the following installed:
-
+Make sure you have the following installed:
 Node.js (v14.x or above)
-
-MongoDB (Local or Atlas for remote setup)
-
+MongoDB (local or remote using MongoDB Atlas)
 Google Gemini API Key (for AI feedback)
-
-Postman or any other API testing tool (for testing)
+Postman (for testing API endpoints)
 
 Installation
 Clone the repository:
@@ -61,8 +35,8 @@ Clone the repository:
 bash
 Copy
 Edit
-git clone https://github.com/your-username/ai-interview-backend.git
-cd ai-interview-backend
+git clone https://github.com/inum9/intervion.git
+cd intervion
 Install dependencies:
 
 bash
@@ -84,11 +58,15 @@ bash
 Copy
 Edit
 npm start
-The server will be running at http://localhost:3000.
+The server will be available at http://localhost:3000.
 
 API Documentation
-The API endpoints are documented using Swagger and can be accessed at http://localhost:3000/api-docs.
+This project uses Swagger UI to automatically generate API documentation. You can access the documentation at:
 
+bash
+Copy
+Edit
+http://localhost:3000/api-docs
 Endpoints
 1. Start Interview (POST /api/v1/Ai/start-interview)
 Request Body:
@@ -98,7 +76,7 @@ Copy
 Edit
 {
   "candidateId": "string",
-  "interviewRole": "developer" // other roles: designer, recruiter
+  "interviewRole": "developer" // Other roles: designer, recruiter
 }
 Response:
 
@@ -148,31 +126,18 @@ Edit
 }
 Contributing
 Fork the repository.
-
 Create a new branch (git checkout -b feature/your-feature).
-
 Commit your changes (git commit -am 'Add new feature').
-
-Push to the branch (git push origin feature/your-feature).
-
+Push to your branch (git push origin feature/your-feature).
 Create a Pull Request.
-
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
-
 Acknowledgements
-Google Gemini API for providing AI-driven interview feedback.
-
-Swagger UI for automatic API documentation.
-
-This markdown will help you provide a solid description of your project, the technology stack used, and detailed API documentation for anyone who needs to understand how to interact with your backend service.
+Google Gemini API for providing AI-based interview feedback.
+postman for automatically generating and displaying API documentation.
+This markdown file will give a comprehensive overview of your project, installation instructions, API documentation, and contribution guidelines. It will make it easier for others to understand, use, and contribute to your project.
 
 
 
 
 
-
-
-
-
-Ask ChatGPT
