@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { AiInterview } from "../model/aiaInterview.model.js";
 import { evaluateAnswerAi } from "../services/Api_gemini.service.js";
+import { genrateSummary } from "../services/interviewSummary.services.js";
 
 const getInterviewQuestions = (role) => {
   const roleQuestions = {
@@ -98,5 +99,22 @@ const calculateSelectionProbability = (aiFeedback) => {
 
   return Math.min(score, 100); // Cap at 100%
 };
+const summaryGenerated= asyncHandler(async(req,res)=>{
+  const {interviewId}=req.params;
+  if(!interviewId)
+  {
+    throw new ApiError(401,"interview id not found");
+  }
+  console.log(interviewId);
+  const summary=  await genrateSummary(interviewId);
+  if(!summary)
+  {
+    throw new ApiError(401," summary not  found ");
 
-export { startInterview, submitAnswer };
+  }
+  res.status(200).json (new ApiResponse(200,summary,"summary created successfully!!"))
+  
+  
+})
+
+export { startInterview, submitAnswer ,summaryGenerated};

@@ -24,7 +24,7 @@ const candidateInterviewSchema = new mongoose.Schema(
       {
         question: { type: String, required: true }, // Interview question
         answer: { type: String, required: true }, // Candidate's answer
-        aiFeedback: { type: String }, // AI feedback for the answer
+        aiFeedback: { type: mongoose.Schema.Types.Mixed }, // AI feedback for the answer
       },
     ],
   },
