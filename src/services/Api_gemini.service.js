@@ -8,8 +8,9 @@ async function evaluateAnswerAi(answer) {
     // Customizing the prompt to focus on concise and useful feedback
     const prompt = `
       You are an experienced interviewer in all corporate fields.
-      Evaluate the following answer based on clarity, conciseness, grammar, and relevance. 
-      Provide short and actionable feedback that can help the candidate improve their answer. 
+      Evaluate the following answer based on clarity, conciseness, grammar, and relevance.
+      Provide short and actionable feedback that can help the candidate improve their answer.
+      Suggest areas for improvement, such as structure, vocabulary, depth of answer, etc.
       Be clear and to the point, focusing on what the candidate can improve without unnecessary details.
       
       Candidate's answer: "${answer}"
@@ -21,12 +22,36 @@ async function evaluateAnswerAi(answer) {
       contents: prompt,          // Use the custom prompt
     });
 
-    // Extract and return the feedback text from the AI response
-    return response.text || "AI evaluation failed. Please try again later.";
+    // Extract feedback and suggestions from the AI response
+    const feedback = response.text || "AI evaluation failed. Please try again later.";
+    const suggestions = extractSuggestions(feedback);
+
+    return { aiFeedback: feedback, aiSuggestions: suggestions };
+
   } catch (error) {
     console.error("Error generating feedback:", error.message);
-    return "AI evaluation failed. Please try again later.";  // Fallback message
+    return {
+      aiFeedback: "AI evaluation failed. Please try again later.",
+      aiSuggestions: ["No suggestions available due to error."]
+    };
   }
+}
+
+// A helper function to extract actionable suggestions from the AI feedback
+function extractSuggestions(feedback) {
+  // You can implement more sophisticated logic here to extract actionable suggestions
+  if (feedback.includes("could be more concise")) {
+    return ["Try to be more concise in your responses."];
+  }
+  if (feedback.includes("needs more detail")) {
+    return ["Provide more details on your thought process."];
+  }
+  if (feedback.includes("clarity can be improved")) {
+    return ["Work on the clarity of your explanation."];
+  }
+
+  // Default suggestion if none found
+  return ["Keep up the good work!"];
 }
 
 export { evaluateAnswerAi };
